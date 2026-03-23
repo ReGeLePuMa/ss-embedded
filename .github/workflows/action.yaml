@@ -104,3 +104,23 @@ jobs:
 
       - name: Security scan with Bandit
         run: bandit receiver.py -ll
+
+  compile-test:
+    name: Python Compile Test
+    runs-on: ubuntu-latest
+
+    defaults:
+        run:
+          working-directory: ./receiver/
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Smoke test
+        run: python -m py_compile receiver.py
