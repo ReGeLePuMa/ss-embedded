@@ -17,6 +17,9 @@ jobs:
     name: Build ESP32 Firmware
     runs-on: ubuntu-latest
 
+    permissions:
+        contents: write
+
     defaults:
         run:
           working-directory: ./camera
