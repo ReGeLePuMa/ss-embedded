@@ -1,4 +1,5 @@
 ./camera/.pio/
+./camera/secrets.ini
 
 # Python
 ./receiver/.venv/

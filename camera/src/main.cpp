@@ -11,9 +11,19 @@
 // ===========================
 // Configuration
 // ===========================
-const char* ssid     = "Pacanea in Corsa";       // TODO: Modificați cu SSID-ul rețelei voastre
-const char* password = "adiminune2k25";     // TODO: Modificați cu parola rețelei voastre
-const char* mqtt_server = "10.19.195.60"; // TODO: Modificați cu IP-ul calculatorului (ip addr / ipconfig)
+#ifndef WIFI_SSID
+  #define WIFI_SSID "FallbackSSID"
+#endif
+#ifndef WIFI_PASS
+  #define WIFI_PASS "FallbackPass"
+#endif
+#ifndef MQTT_SERVER_IP
+  #define MQTT_SERVER_IP "127.0.0.1"
+#endif
+
+const char* ssid     = WIFI_SSID;
+const char* password = WIFI_PASS;
+const char* mqtt_server = MQTT_SERVER_IP;
 const int mqtt_port = 1883;
  
 // Topics
