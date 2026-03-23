@@ -1,0 +1,14 @@
+./camera/.pio/
+
+# Python
+./receiver/.venv/
+./receiver/__pycache__/
+./receiver/*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
