@@ -37,6 +37,10 @@ jobs:
         run: pip install platformio
 
       - name: Build Firmware (ESP32-CAM AI-Thinker)
+        env:
+          WIFI_SSID: ${{ secrets.WIFI_SSID }}
+          WIFI_PASS: ${{ secrets.WIFI_PASS }}
+          MQTT_SERVER: ${{ secrets.MQTT_SERVER }}
         run: pio run -e esp32cam
  
       # Salvăm firmware.bin ca artifact descărcabil
