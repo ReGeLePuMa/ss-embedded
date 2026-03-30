@@ -20,11 +20,16 @@
 #ifndef MQTT_SERVER_IP
   #define MQTT_SERVER_IP "127.0.0.1"
 #endif
+#ifndef MQTT_CERTIFICATE
+  #define MQTT_CERTIFICATE ""
+#endif
+
 
 const char* ssid     = WIFI_SSID;
 const char* password = WIFI_PASS;
 const char* mqtt_server = MQTT_SERVER_IP;
-const int mqtt_port = 1883;
+const char* ca_cert = MQTT_CERTIFICATE;
+const int mqtt_port = 8883;
  
 // Topics
 const char* TOPIC_COMMAND = "ssproject/commands";
@@ -152,7 +157,7 @@ void setup() {
     Serial.print(".");
   }
   Serial.printf("\nWiFi connected! IP: %s\n", WiFi.localIP().toString().c_str());
- 
+  espClient.setCACert(ca_cert);
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
   client.setBufferSize(65000); 
