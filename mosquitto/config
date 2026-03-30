@@ -1,2 +1,7 @@
-listener 1883
+listener 8883
+cafile /certs/ca.crt
+certfile /certs/server.crt
+keyfile /certs/server.key
+require_certificate false
 allow_anonymous true
+

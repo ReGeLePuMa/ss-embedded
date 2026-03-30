@@ -2,10 +2,11 @@ import paho.mqtt.client as mqtt
 import cv2
 import numpy as np
 import threading
+import os
  
 # Configuration
-BROKER = "127.0.0.1"  # TODO: Modificați cu IP-ul brokerului vostru
-PORT = 1883
+BROKER = os.environ.get("BROKER_HOST", "127.0.0.1")  # TODO: Modificați cu IP-ul brokerului vostru
+PORT = int(os.environ.get("BROKER_PORT", 8883))
 TOPIC_IMAGE = "ssproject/images"
 TOPIC_COMMAND = "ssproject/commands"
  
@@ -43,6 +44,7 @@ def main():
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
+    client.tls_set(ca_certs="/certs/ca.crt")
  
     try:
         client.connect(BROKER, PORT, 60)
