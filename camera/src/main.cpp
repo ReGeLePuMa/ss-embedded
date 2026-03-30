@@ -4,9 +4,15 @@
 **********************************************************************/
 #include "esp_camera.h"
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 // CAMERA_MODEL is defined in platformio.ini
 #include "camera_pins.h"
+#if __has_include("cert.h")
+  #include "cert.h"
+#else
+  const char* CA_CERT_STR = "";
+#endif
  
 // ===========================
 // Configuration
@@ -21,16 +27,18 @@
   #define MQTT_SERVER_IP "127.0.0.1"
 #endif
 
+
 const char* ssid     = WIFI_SSID;
 const char* password = WIFI_PASS;
 const char* mqtt_server = MQTT_SERVER_IP;
-const int mqtt_port = 1883;
+const char* ca_cert = CA_CERT_STR;
+const int mqtt_port = 8883;
  
 // Topics
 const char* TOPIC_COMMAND = "ssproject/commands";
 const char* TOPIC_IMAGE   = "ssproject/images";
  
-WiFiClient espClient;
+WiFiClientSecure espClient;
 PubSubClient client(espClient);
  
 // State variables
@@ -152,7 +160,7 @@ void setup() {
     Serial.print(".");
   }
   Serial.printf("\nWiFi connected! IP: %s\n", WiFi.localIP().toString().c_str());
- 
+  espClient.setCACert(ca_cert);
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
   client.setBufferSize(65000); 

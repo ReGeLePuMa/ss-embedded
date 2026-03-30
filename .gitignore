@@ -1,5 +1,6 @@
 ./camera/.pio/
 ./camera/secrets.ini
+./camera/include/cert.h
 
 # Python
 ./receiver/.venv/
